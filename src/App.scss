@@ -1,0 +1,13 @@
+.app {
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+
+    .bottom-wrapper{
+        display: flex;
+        gap: 20px;
+    }
+}
