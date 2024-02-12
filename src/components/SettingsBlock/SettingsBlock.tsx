@@ -3,7 +3,7 @@ import style from './SettingsBlock.module.scss'
 
 const SettingsBlock = () => {
   return (
-    <div>SettingsBlock</div>
+    <div className={style['settings-block']} >SettingsBlock</div>
   )
 }
 

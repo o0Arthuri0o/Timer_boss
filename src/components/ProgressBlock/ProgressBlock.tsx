@@ -2,7 +2,7 @@ import style from './ProgressBlock.module.scss'
 
 const ProgressBlock = () => {
   return (
-    <div>ProgressBlock</div>
+    <div className={style['progress-block']} >ProgressBlock</div>
   )
 }
 
