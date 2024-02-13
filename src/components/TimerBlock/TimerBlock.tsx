@@ -7,7 +7,7 @@ const TimerBlock = () => {
 
 
   return (
-    <div className={style['timer-block']} >
+    <div className={style['timer-block']} style={{background: bgColor === '#212d3b' ? '#ffffff' : '#212d3b'}}>
       test
       {bgColor}
     </div>
