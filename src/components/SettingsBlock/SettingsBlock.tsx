@@ -7,7 +7,7 @@ const SettingsBlock = () => {
 
 
   return (
-    <div className={style['settings-block']} style={{background: bgColor === '#212d3b' ? '#ffffff' : '#212d3b'}} >SettingsBlock</div>
+    <div className={style['settings-block']} style={{background: bgColor === '#212d3b' ? '#487d49' : '#000000'}} >SettingsBlock</div>
   )
 }
 
