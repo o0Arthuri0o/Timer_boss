@@ -16,11 +16,6 @@ declare global {
 
 function App() {
 
-  useEffect(() => {
-    window.Telegram.WebApp.open({
-      fullscreen: true
-    });
-  }, [])
 
   const [isModal, setIsModal] = useState(false)
 
