@@ -28,7 +28,6 @@ type ModalProp = {
 
 const Modal = ({setIsModal}: ModalProp) => {
 
-    const telegramStorage = window.Telegram.WebApp.CloudStorage
 
     const dispatch = useDispatch()
     const valuesStore = useSelector((state: RootState) => state.settings)
@@ -36,15 +35,15 @@ const Modal = ({setIsModal}: ModalProp) => {
  
     const saveNewSettings = () => {
         dispatch(updateSettings(settingsValues))
-        telegramStorage.setItem('settings', settingsValues)
+        localStorage.setItem('settings', JSON.stringify(settingsValues))
         setIsModal(false)
     }
-    const test = telegramStorage.getItem('settings')
+
   return (
     <>
         <Card className="absolute z-50 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" >
             <CardHeader>
-                <CardTitle>Settings{test} ///</CardTitle>
+                <CardTitle>Settings</CardTitle>
                 <CardDescription>Set your time</CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col items-center" >
