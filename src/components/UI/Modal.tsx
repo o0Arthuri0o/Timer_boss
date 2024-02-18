@@ -28,7 +28,7 @@ type ModalProp = {
 
 const Modal = ({setIsModal}: ModalProp) => {
 
-    // const telegramStorage = window.Telegram.WebApp.CloudStorage
+    const telegramStorage = window.Telegram.WebApp.CloudStorage
 
     const dispatch = useDispatch()
     const valuesStore = useSelector((state: RootState) => state.settings)
@@ -36,7 +36,7 @@ const Modal = ({setIsModal}: ModalProp) => {
  
     const saveNewSettings = () => {
         dispatch(updateSettings(settingsValues))
-        // telegramStorage.setItem('settings', JSON.stringify(settingsValues))
+        telegramStorage.setItem('settings', JSON.stringify(settingsValues))
         setIsModal(false)
     }
 
@@ -53,7 +53,11 @@ const Modal = ({setIsModal}: ModalProp) => {
                     <div className="flex justify-between" >
                         <div className="flex items-center gap-7 mb-5" >
                             <p className="font-semibold text-xl" >Work</p>
-                            <p className="text-2xl" >{settingsValues.work} min</p>
+                            <div className="text-2xl flex justify-between w-[85px]" >
+                                <p>{settingsValues.work}</p>
+                                <p>min</p>
+                            </div>
+                            
                         </div>
                         <div className="flex" >
                             <Button variant="outline" size="icon" onClick={()=> setSettingsValues({...settingsValues, work: settingsValues.work - .5})} >
@@ -72,7 +76,10 @@ const Modal = ({setIsModal}: ModalProp) => {
                     <div className="flex justify-between" >
                         <div className="flex items-center gap-7 mb-5" >
                             <p className="font-semibold text-xl" >Rest</p>
-                            <p className="text-2xl" >{settingsValues.rest} min</p>
+                            <div className="text-2xl flex justify-between w-[85px]" >
+                                <p>{settingsValues.rest}</p>
+                                <p>min</p>
+                            </div>
                         </div>
                         <div className="flex" >
                             <Button variant="outline" size="icon" onClick={()=> setSettingsValues({...settingsValues, rest: settingsValues.rest - .5})} >
