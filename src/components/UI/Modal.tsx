@@ -52,7 +52,7 @@ const Modal = ({setIsModal}: ModalProp) => {
                     <div className="flex justify-between" >
                         <div className="flex items-center gap-7 mb-5" >
                             <p className="font-semibold text-xl" >Work</p>
-                            <div className="text-2xl flex justify-between min-w-[85px]" >
+                            <div className="text-2xl flex justify-between min-w-[87px]" >
                                 <p>{settingsValues.work}</p>
                                 <p>min</p>
                             </div>
@@ -75,7 +75,7 @@ const Modal = ({setIsModal}: ModalProp) => {
                     <div className="flex justify-between" >
                         <div className="flex items-center gap-7 mb-5" >
                             <p className="font-semibold text-xl" >Rest</p>
-                            <div className="text-2xl flex justify-between min-w-[85px]" >
+                            <div className="text-2xl flex justify-between min-w-[87px]" >
                                 <p>{settingsValues.rest}</p>
                                 <p>min</p>
                             </div>

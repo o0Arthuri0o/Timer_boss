@@ -16,11 +16,12 @@ declare global {
 
 function App() {
 
+  const bg = window.Telegram.WebApp.backgroundColor
 
   const [isModal, setIsModal] = useState(false)
 
   return (
-    <div className="flex flex-col gap-5 h-screen p-8">
+    <div className={`flex flex-col gap-5 h-screen p-8 bg-[${bg}]`}>
       { isModal &&
         <Modal setIsModal={setIsModal} />
       }
