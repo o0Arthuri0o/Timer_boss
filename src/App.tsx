@@ -27,7 +27,7 @@ function App() {
       }
 
       <TimerBlock/>
-
+      {bg}
       <ProgressBlock/>
 
       <div className="flex justify-between gap-5 " >

@@ -18,6 +18,7 @@ import { Button } from "../../../@/components/button"
 import { RootState } from "@/store"
 import { Dispatch, SetStateAction, useState } from "react"
 import { updateSettings } from "../../store/settingsSlice";
+import { updateCurrent } from "../../store/currentSlice";
   
 
 type ModalProp = {
@@ -35,6 +36,7 @@ const Modal = ({setIsModal}: ModalProp) => {
  
     const saveNewSettings = () => {
         dispatch(updateSettings(settingsValues))
+        dispatch(updateCurrent(settingsValues))
         localStorage.setItem('settings', JSON.stringify(settingsValues))
         setIsModal(false)
     }
