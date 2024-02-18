@@ -36,15 +36,15 @@ const Modal = ({setIsModal}: ModalProp) => {
  
     const saveNewSettings = () => {
         dispatch(updateSettings(settingsValues))
-        telegramStorage.setItem('settings', JSON.stringify(settingsValues))
+        telegramStorage.setItem('settings', settingsValues)
         setIsModal(false)
     }
-
+    const test = telegramStorage.getItem('settings')
   return (
     <>
         <Card className="absolute z-50 top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%]" >
             <CardHeader>
-                <CardTitle>Settings</CardTitle>
+                <CardTitle>Settings{test} ///</CardTitle>
                 <CardDescription>Set your time</CardDescription>
             </CardHeader>
             <CardContent className="flex flex-col items-center" >
@@ -53,7 +53,7 @@ const Modal = ({setIsModal}: ModalProp) => {
                     <div className="flex justify-between" >
                         <div className="flex items-center gap-7 mb-5" >
                             <p className="font-semibold text-xl" >Work</p>
-                            <div className="text-2xl flex justify-between w-[85px]" >
+                            <div className="text-2xl flex justify-between min-w-[85px]" >
                                 <p>{settingsValues.work}</p>
                                 <p>min</p>
                             </div>
@@ -76,7 +76,7 @@ const Modal = ({setIsModal}: ModalProp) => {
                     <div className="flex justify-between" >
                         <div className="flex items-center gap-7 mb-5" >
                             <p className="font-semibold text-xl" >Rest</p>
-                            <div className="text-2xl flex justify-between w-[85px]" >
+                            <div className="text-2xl flex justify-between min-w-[85px]" >
                                 <p>{settingsValues.rest}</p>
                                 <p>min</p>
                             </div>
