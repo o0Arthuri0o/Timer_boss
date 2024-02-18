@@ -20,10 +20,14 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
 
-    "plugins": [{
-      "name": "typescript-plugin-css-modules"
-    }]
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
+    
   },
-  "include": ["src"],
+  "include": ["src", "@/components/card.tsx", "@/components/slider.tsx", "@/components/separator.tsx", "@/components/button.tsx"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
