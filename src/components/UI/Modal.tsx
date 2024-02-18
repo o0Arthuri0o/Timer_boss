@@ -28,7 +28,7 @@ type ModalProp = {
 
 const Modal = ({setIsModal}: ModalProp) => {
 
-    const telegramStorage = window.Telegram.WebApp.CloudStorage
+    // const telegramStorage = window.Telegram.WebApp.CloudStorage
 
     const dispatch = useDispatch()
     const valuesStore = useSelector((state: RootState) => state.settings)
@@ -36,7 +36,7 @@ const Modal = ({setIsModal}: ModalProp) => {
  
     const saveNewSettings = () => {
         dispatch(updateSettings(settingsValues))
-        telegramStorage.setItem('settings', JSON.stringify(settingsValues))
+        // telegramStorage.setItem('settings', JSON.stringify(settingsValues))
         setIsModal(false)
     }
 
