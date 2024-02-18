@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ProgressBlock from "./components/ProgressBlock"
 import RoundBlock from "./components/RoundBlock"
 import SettingsBlock from "./components/SettingsBlock"
@@ -16,7 +16,11 @@ declare global {
 
 function App() {
 
-  
+  useEffect(() => {
+    window.Telegram.WebApp.open({
+      fullscreen: true
+    });
+  }, [])
 
   const [isModal, setIsModal] = useState(false)
 

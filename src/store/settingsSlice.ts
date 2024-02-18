@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
-const telegramStorage = window.Telegram.WebApp.CloudStorage
+// const telegramStorage = window.Telegram.WebApp.CloudStorage
 
 
 export interface SettingsState {
@@ -12,18 +12,18 @@ export interface SettingsState {
 
 let initialState: SettingsState;
 
-const initValueFromStorage = telegramStorage.getItem('settings')
+// const initValueFromStorage = telegramStorage.getItem('settings')
 
-initialState = JSON.parse(initValueFromStorage)
-if(!initValueFromStorage)
-  {
-    initialState = {
+// initialState = JSON.parse(initValueFromStorage)
+// if(!initValueFromStorage)
+//   {
+   
+//   }
+ initialState = {
       work: 25,
       rest: 5,
       rounds: 4
     }
-  }
-
 
 export const settingsSlice = createSlice({
   name: 'settings',
