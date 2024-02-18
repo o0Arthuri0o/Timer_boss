@@ -13,15 +13,16 @@ export interface SettingsState {
 let initialState: SettingsState;
 
 const initValueFromStorage = telegramStorage.getItem('settings')
-if(initValueFromStorage) {
-  initialState = {...initValueFromStorage}
-} else {
-  initialState = {
-    work: 25,
-    rest: 5,
-    rounds: 4
+
+initialState = JSON.parse(initValueFromStorage)
+if(!initValueFromStorage)
+  {
+    initialState = {
+      work: 25,
+      rest: 5,
+      rounds: 4
+    }
   }
-}
 
 
 export const settingsSlice = createSlice({

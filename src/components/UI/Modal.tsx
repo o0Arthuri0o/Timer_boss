@@ -36,7 +36,7 @@ const Modal = ({setIsModal}: ModalProp) => {
  
     const saveNewSettings = () => {
         dispatch(updateSettings(settingsValues))
-        telegramStorage.setItem('settings', settingsValues)
+        telegramStorage.setItem('settings', JSON.stringify(settingsValues))
         setIsModal(false)
     }
 
