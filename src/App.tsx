@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react"
 import ProgressBlock from "./components/ProgressBlock"
 import RoundBlock from "./components/RoundBlock"
 import SettingsBlock from "./components/SettingsBlock"
