@@ -1,58 +1,75 @@
 import { RootState } from '@/store';
+import { updateIsTap, updateRounds, updateRoundsWithRest } from '../store/currentSlice';
 import { useEffect, useState } from 'react';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 
 const TimerBlock = () => {
 
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
 
-  const [isTap, setIsTap] = useState(false)
+  // const [isTap, setIsTap] = useState(false)
   const valuesFromStore = useSelector((state: RootState) => state.settings)
-  // const currentValues = useSelector((state: RootState) => state.current)
+  const currentValues = useSelector((state: RootState) => state.current)
   const [currentTime, setCurrentTime] = useState<number>(valuesFromStore.work*60)
   const [isWork, setIsWork] = useState(true)
-  const [currentRoundsWithRest, setCurrentRoundsWithRest] = useState(0)
-  const [currentRound, setCurrentRound] = useState(0)
+  // const [currentRoundsWithRest, setCurrentRoundsWithRest] = useState(0)
+  // const [currentRound, setCurrentRound] = useState(0)
+  const audio = new Audio('../../alarm.wav')
+  
+  
 
   useEffect(() => {
-    setCurrentTime(valuesFromStore.work*60)
-  }, [valuesFromStore])
-
-  useEffect(() => {
-    // const workSeconds = valuesFromStore.work * 60
-    // const restSeconds = valuesFromStore.rest * 60  
-
 
     const intervalOfWork = setInterval(() => {
-      if(isTap && currentRound <= valuesFromStore.rounds && isWork) {
+      if(currentValues.isTap && currentValues.rounds < valuesFromStore.rounds && isWork) {
         setCurrentTime((currentTime) => (currentTime >= 1 ? currentTime - 1 : 0))
+
         if(currentTime === 0) {
-          setCurrentRound(currentRound+1)
-          setCurrentRoundsWithRest(currentRoundsWithRest+1)
+          dispatch(updateRoundsWithRest(currentValues.roundsWirtRest + 1))
+          dispatch(updateRounds(currentValues.rounds+1))
           setIsWork(!isWork)
+          setCurrentTime(valuesFromStore.rest*60)
+          audio.play()
         }
       } 
     }, 1000)
-
-    // const intervalOfRest = setInterval(() => {
-    //   if(isTap && currentRound <= valuesFromStore.rounds && !isWork) {
-    //     setCurrentTime((currentTime) => (currentTime >= 1 ? currentTime - 1 : 0))
-    //     if(currentTime === 0) {
-    //       // setCurrentRound(currentRound+1)
-    //       setCurrentRoundsWithRest(currentRoundsWithRest+1)
-    //       setIsWork(isWork)
-    //     }
-    //   } 
-    // }, 1000)
     
     return () => {
       clearInterval(intervalOfWork)
-      // clearInterval(intervalOfRest)
     }
-  }, [isTap])
+  }, [isWork, currentTime, currentValues])
+
+
+
+  useEffect(() => {
+    const intervalOfRest = setInterval(() => {
+      if(currentValues.isTap && currentValues.rounds < valuesFromStore.rounds && !isWork) {
+        setCurrentTime((currentTime) => (currentTime >= 1 ? currentTime - 1 : 0))
+        if(currentTime === 0) {
+          dispatch(updateRoundsWithRest(currentValues.roundsWirtRest + 1))
+          setIsWork(!isWork)
+          setCurrentTime(valuesFromStore.work*60)
+          audio.play()
+        } 
+      } 
+    }, 1000)
+
+    return () => {
+      clearInterval(intervalOfRest)
+    }
+  }, [isWork, currentTime, currentValues])
+
+  useEffect(() => {
+    if(currentValues.rounds === valuesFromStore.rounds){
+      dispatch(updateRoundsWithRest(0))
+      dispatch(updateRounds(0))
+      dispatch(updateIsTap(false))
+      setIsWork(true)
+    }
+  }, [currentValues, isWork])
 
   const getTimeFormat = () => {
     const minute = Math.floor(currentTime/60)
@@ -72,23 +89,32 @@ const TimerBlock = () => {
     }
   }
 
+  const resetTimer = () => {
+    dispatch(updateRoundsWithRest(0))
+    dispatch(updateRounds(0))
+    dispatch(updateIsTap(false))
+    setIsWork(true)
+    setCurrentTime(valuesFromStore.work*60)
+  }
 
   return (
-    <div className="h-3/5 bg-[#7469b5] rounded-2xl text-white flex flex-col justify-between items-center p-5 relative" onClick={()=>setIsTap(!isTap)} >
+    <div className="h-3/5 min-h-[230px]  bg-[#7469b5] rounded-2xl text-white flex flex-col justify-between items-center p-5 relative" onClick={()=>dispatch(updateIsTap(!currentValues.isTap))} >
+      
 
-      <p className="bg-[#fcc73b] rounded-lg p-2 text-black font-semibold self-end" >reset</p>
+      <p className="bg-[#fcc73b] rounded-lg p-2 text-black font-semibold self-end" onClick={(e) => {e.stopPropagation(),resetTimer()}} >reset</p>
+
 
       <CircularProgressbar value={getPercentage()} text={getTimeFormat()} strokeWidth={9} styles={buildStyles({
         textSize: '16px',
         pathColor: '#c4ff43',
         textColor: '#fff',
         trailColor: '#000',
-      })} className='w-40 h-40 min-[340px]:w-72 min-[340px]:h-72 absolute top-1/2 left-1/2  translate-x-[-50%] translate-y-[-50%]' />
+      })} className='w-32  min-[350px]:w-60 min-[400px]:w-72  absolute top-1/2 left-1/2  translate-x-[-50%] translate-y-[-50%]' />
 
-
-      <p className='text-black' >
-        Tap to {isTap ? 'stop' : 'start'}
-      </p>
+      {currentValues.isTap && isWork && <p className='font-bold' >work...</p>}
+      {currentValues.isTap && !isWork && <p className='font-bold' >rest...</p>}
+      
+     
     </div>
 
 

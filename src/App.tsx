@@ -21,7 +21,7 @@ function App() {
   const [isModal, setIsModal] = useState(false)
 
   return (
-    <div className={`flex flex-col gap-5 h-screen p-8 bg-[${bg}]`}>
+    <div className='flex flex-col gap-5 h-screen p-8' style={{background: bg}}>
       { isModal &&
         <Modal setIsModal={setIsModal} />
       }

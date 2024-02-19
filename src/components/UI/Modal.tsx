@@ -18,7 +18,6 @@ import { Button } from "../../../@/components/button"
 import { RootState } from "@/store"
 import { Dispatch, SetStateAction, useState } from "react"
 import { updateSettings } from "../../store/settingsSlice";
-import { updateCurrent } from "../../store/currentSlice";
   
 
 type ModalProp = {
@@ -36,7 +35,6 @@ const Modal = ({setIsModal}: ModalProp) => {
  
     const saveNewSettings = () => {
         dispatch(updateSettings(settingsValues))
-        dispatch(updateCurrent(settingsValues))
         localStorage.setItem('settings', JSON.stringify(settingsValues))
         setIsModal(false)
     }
@@ -61,15 +59,15 @@ const Modal = ({setIsModal}: ModalProp) => {
                             
                         </div>
                         <div className="flex" >
-                            <Button variant="outline" size="icon" onClick={()=> setSettingsValues({...settingsValues, work: settingsValues.work - .5})} >
+                            <Button variant="outline" size="icon" onClick={()=> setSettingsValues({...settingsValues, work: settingsValues.work - .25})} >
                                 <MdKeyboardArrowLeft className="w-5 h-5" />
                             </Button>
-                            <Button variant="outline" size="icon" onClick={()=> setSettingsValues({...settingsValues, work: settingsValues.work + .5}) } >
+                            <Button variant="outline" size="icon" onClick={()=> setSettingsValues({...settingsValues, work: settingsValues.work + .25}) } >
                                 <MdKeyboardArrowRight  className="w-5 h-5"/>
                             </Button>
                         </div>
                     </div>
-                    <Slider value={[settingsValues.work]} max={60} step={0.5} onValueChange={([e])=>setSettingsValues({...settingsValues, work: e})} />
+                    <Slider value={[settingsValues.work]} max={60} step={0.25} onValueChange={([e])=>setSettingsValues({...settingsValues, work: e})} />
                 </div>
                 <Separator className="m-4"/>
 
@@ -83,15 +81,15 @@ const Modal = ({setIsModal}: ModalProp) => {
                             </div>
                         </div>
                         <div className="flex" >
-                            <Button variant="outline" size="icon" onClick={()=> setSettingsValues({...settingsValues, rest: settingsValues.rest - .5})} >
+                            <Button variant="outline" size="icon" onClick={()=> setSettingsValues({...settingsValues, rest: settingsValues.rest - .25})} >
                                 <MdKeyboardArrowLeft className="w-5 h-5" />
                             </Button>
-                            <Button variant="outline" size="icon" onClick={()=> setSettingsValues({...settingsValues, rest: settingsValues.rest + .5}) } >
+                            <Button variant="outline" size="icon" onClick={()=> setSettingsValues({...settingsValues, rest: settingsValues.rest + .25}) } >
                                 <MdKeyboardArrowRight  className="w-5 h-5"/>
                             </Button>
                         </div>
                     </div>
-                    <Slider value={[settingsValues.rest]} max={60} step={0.5} onValueChange={([e])=>setSettingsValues({...settingsValues, rest: e})} />
+                    <Slider value={[settingsValues.rest]} max={60} step={0.25} onValueChange={([e])=>setSettingsValues({...settingsValues, rest: e})} />
                 </div>
                 <Separator className="m-4"/>
 
