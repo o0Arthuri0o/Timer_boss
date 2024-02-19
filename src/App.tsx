@@ -17,7 +17,7 @@ declare global {
 function App() {
 
   const bg = window.Telegram.WebApp.backgroundColor
-
+  window.Telegram.WebApp.expand()
   const [isModal, setIsModal] = useState(false)
 
   return (

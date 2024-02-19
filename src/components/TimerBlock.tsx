@@ -1,6 +1,6 @@
 import { RootState } from '@/store';
-import { updateIsTap, updateRounds, updateRoundsWithRest } from '../store/currentSlice';
-import { useEffect, useState } from 'react';
+import { updateIsTap, updateProgressTime, updateRounds, updateRoundsWithRest } from '../store/currentSlice';
+import { useEffect, useRef, useState } from 'react';
 import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { useDispatch, useSelector } from 'react-redux';
@@ -17,22 +17,27 @@ const TimerBlock = () => {
   const [isWork, setIsWork] = useState(true)
   // const [currentRoundsWithRest, setCurrentRoundsWithRest] = useState(0)
   // const [currentRound, setCurrentRound] = useState(0)
-  const audio = new Audio('../../alarm.wav')
   
-  
+  const audio = useRef<HTMLAudioElement>(null)
+
+  useEffect(() => {
+    setCurrentTime(valuesFromStore.work*60)
+  }, [valuesFromStore])
 
   useEffect(() => {
 
     const intervalOfWork = setInterval(() => {
       if(currentValues.isTap && currentValues.rounds < valuesFromStore.rounds && isWork) {
         setCurrentTime((currentTime) => (currentTime >= 1 ? currentTime - 1 : 0))
-
+        dispatch(updateProgressTime(currentValues.progressTime+1))
         if(currentTime === 0) {
           dispatch(updateRoundsWithRest(currentValues.roundsWirtRest + 1))
           dispatch(updateRounds(currentValues.rounds+1))
           setIsWork(!isWork)
           setCurrentTime(valuesFromStore.rest*60)
-          audio.play()
+          if (audio.current !== null) {
+            audio.current.play();
+          }     
         }
       } 
     }, 1000)
@@ -48,11 +53,14 @@ const TimerBlock = () => {
     const intervalOfRest = setInterval(() => {
       if(currentValues.isTap && currentValues.rounds < valuesFromStore.rounds && !isWork) {
         setCurrentTime((currentTime) => (currentTime >= 1 ? currentTime - 1 : 0))
+        dispatch(updateProgressTime(currentValues.progressTime+1))
         if(currentTime === 0) {
           dispatch(updateRoundsWithRest(currentValues.roundsWirtRest + 1))
           setIsWork(!isWork)
           setCurrentTime(valuesFromStore.work*60)
-          audio.play()
+          if (audio.current !== null) {
+            audio.current.play();
+          }             
         } 
       } 
     }, 1000)
@@ -109,12 +117,12 @@ const TimerBlock = () => {
         pathColor: '#c4ff43',
         textColor: '#fff',
         trailColor: '#000',
-      })} className='w-32  min-[350px]:w-60 min-[400px]:w-72  absolute top-1/2 left-1/2  translate-x-[-50%] translate-y-[-50%]' />
+      })} className='w-[150px]  min-[370px]:w-64 min-[400px]:w-72  absolute top-1/2 left-1/2  translate-x-[-50%] translate-y-[-50%]' />
 
       {currentValues.isTap && isWork && <p className='font-bold' >work...</p>}
       {currentValues.isTap && !isWork && <p className='font-bold' >rest...</p>}
       
-     
+      <audio ref={audio} src='../../alarm.wav' ></audio>
     </div>
 
 

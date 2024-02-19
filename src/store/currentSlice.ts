@@ -4,13 +4,15 @@ import type { PayloadAction } from '@reduxjs/toolkit'
 export interface CurrentState {
   rounds: number,
   roundsWirtRest: number,
-  isTap: boolean
+  isTap: boolean,
+  progressTime: number
 }
 
 const initialState: CurrentState = {
   rounds: 0,
   roundsWirtRest: 0,
-  isTap: false
+  isTap: false,
+  progressTime: 0
 }
 
 export const currentSlice = createSlice({
@@ -31,10 +33,13 @@ export const currentSlice = createSlice({
     },
     updateIsTap: (state, action: PayloadAction<boolean>) => {
         state.isTap = action.payload
-    }
+    },
+    updateProgressTime: (state, action: PayloadAction<number>) => {
+      state.progressTime = action.payload
+  },
   },
 })
 
-export const { updateCurrent, updateRounds, updateIsTap, updateRoundsWithRest } = currentSlice.actions
+export const { updateCurrent, updateRounds, updateIsTap, updateRoundsWithRest, updateProgressTime } = currentSlice.actions
 
 export default currentSlice.reducer
