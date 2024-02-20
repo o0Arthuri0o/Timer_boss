@@ -35,6 +35,7 @@ const TimerBlock = () => {
           if (audio.current !== null) {
             audio.current.play();
           }     
+          window.Telegram.WebApp.HapticFeedback.notificationOccurred()
         }
       } 
     }, 1000)
@@ -57,7 +58,9 @@ const TimerBlock = () => {
           setCurrentTime(valuesFromStore.work*60)
           if (audio.current !== null) {
             audio.current.play();
-          }             
+          }      
+          window.Telegram.WebApp.HapticFeedback.notificationOccurred()
+
         } 
       } 
     }, 1000)

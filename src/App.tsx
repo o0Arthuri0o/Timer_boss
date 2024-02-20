@@ -20,13 +20,8 @@ function App() {
   window.Telegram.WebApp.expand()
   const [isModal, setIsModal] = useState(false)
 
+  console.log(window.Telegram.WebApp)
 
-  // navigator.mediaDevices.getUserMedia({ audio: true })
-  // .then(() => {
-  //   // Create an audio element and set the source to the audio file
-  //   var audio = new Audio('../public/alarm.wav');
-  //   audio.play();
-  // })
 
   return (
     <div className='flex flex-col gap-5 h-screen p-8 ' style={{background: bg}}>
