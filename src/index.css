@@ -68,9 +68,19 @@
  
 @layer base {
   * {
-    @apply border-border;
+    @apply border-border; 
+    font-family: 'JetBrains Mono';
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .progress-circle{
+    @media (max-height:640px) {
+      width: 150px;
+      height: 150px;
+    }
   }
 }
