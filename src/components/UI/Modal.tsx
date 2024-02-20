@@ -98,7 +98,7 @@ const Modal = ({setIsModal}: ModalProp) => {
                         <div className="flex items-center gap-7 mb-5" >
                             <p className="font-semibold text-xl" >Rounds</p>
                             <p className="text-2xl" >{settingsValues.rounds}</p>
-                        </div>
+                        </div>    
                         <div className="flex" >
                             <Button variant="outline" size="icon" onClick={()=> setSettingsValues({...settingsValues, rounds: settingsValues.rounds - 1})} >
                                 <MdKeyboardArrowLeft className="w-5 h-5" />
@@ -108,7 +108,7 @@ const Modal = ({setIsModal}: ModalProp) => {
                             </Button>
                         </div>
                     </div>
-                    <Slider value={[settingsValues.rounds]} max={20} step={1} onValueChange={([e])=>setSettingsValues({...settingsValues, rounds: e})} />
+                    <Slider value={[settingsValues.rounds]} min={1} max={20} step={1} onValueChange={([e])=>setSettingsValues({...settingsValues, rounds: e})} />
                 </div>
                 <Separator className="m-4"/>
 

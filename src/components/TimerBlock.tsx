@@ -10,14 +10,11 @@ const TimerBlock = () => {
 
   const dispatch = useDispatch()
 
-  // const [isTap, setIsTap] = useState(false)
   const valuesFromStore = useSelector((state: RootState) => state.settings)
   const currentValues = useSelector((state: RootState) => state.current)
   const [currentTime, setCurrentTime] = useState<number>(valuesFromStore.work*60)
   const [isWork, setIsWork] = useState(true)
-  // const [currentRoundsWithRest, setCurrentRoundsWithRest] = useState(0)
-  // const [currentRound, setCurrentRound] = useState(0)
-  
+
   const audio = useRef<HTMLAudioElement>(null)
 
   useEffect(() => {
@@ -75,6 +72,7 @@ const TimerBlock = () => {
       dispatch(updateRoundsWithRest(0))
       dispatch(updateRounds(0))
       dispatch(updateIsTap(false))
+      dispatch(updateProgressTime(0))
       setIsWork(true)
     }
   }, [currentValues, isWork])
@@ -101,6 +99,7 @@ const TimerBlock = () => {
     dispatch(updateRoundsWithRest(0))
     dispatch(updateRounds(0))
     dispatch(updateIsTap(false))
+    dispatch(updateProgressTime(0))
     setIsWork(true)
     setCurrentTime(valuesFromStore.work*60)
   }
