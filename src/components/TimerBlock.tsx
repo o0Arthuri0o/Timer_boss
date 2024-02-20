@@ -17,14 +17,7 @@ const TimerBlock = () => {
 
   const audio = useRef<HTMLAudioElement>(null)
 
-  const requestWakeLock = async () => { 
-    try { 
-      const wakeLock = await navigator.wakeLock.request('screen'); 
-    } catch (err) { 
-      console.log(err); 
-    } 
-  }
-  requestWakeLock()
+  navigator.wakeLock.request('screen'); 
 
   useEffect(() => {
     setCurrentTime(valuesFromStore.work*60)
