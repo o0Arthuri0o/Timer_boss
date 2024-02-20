@@ -17,6 +17,15 @@ const TimerBlock = () => {
 
   const audio = useRef<HTMLAudioElement>(null)
 
+  const requestWakeLock = async () => { 
+    try { 
+      const wakeLock = await navigator.wakeLock.request('screen'); 
+    } catch (err) { 
+      console.log(err); 
+    } 
+  }
+  requestWakeLock()
+
   useEffect(() => {
     setCurrentTime(valuesFromStore.work*60)
   }, [valuesFromStore])
@@ -35,7 +44,7 @@ const TimerBlock = () => {
           if (audio.current !== null) {
             audio.current.play();
           }     
-          window.Telegram.WebApp.HapticFeedback.notificationOccurred()
+          window.navigator.vibrate(200)
         }
       } 
     }, 1000)
@@ -59,8 +68,7 @@ const TimerBlock = () => {
           if (audio.current !== null) {
             audio.current.play();
           }      
-          window.Telegram.WebApp.HapticFeedback.notificationOccurred()
-
+          window.navigator.vibrate(200)
         } 
       } 
     }, 1000)

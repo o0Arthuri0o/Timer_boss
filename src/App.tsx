@@ -20,7 +20,6 @@ function App() {
   window.Telegram.WebApp.expand()
   const [isModal, setIsModal] = useState(false)
 
-  console.log(window.Telegram.WebApp)
 
 
   return (
