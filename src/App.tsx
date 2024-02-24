@@ -20,10 +20,7 @@ function App() {
   window.Telegram.WebApp.expand()
   const [isModal, setIsModal] = useState(false)
 
-  useEffect(() => {
-    navigator.mediaDevices.getUserMedia({ audio: true })
-    console.log('test')
-  }, [])
+ 
 
   return (
     <div className='flex flex-col gap-5 h-screen p-8 ' style={{background: bg}}>
