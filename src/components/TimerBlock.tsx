@@ -120,12 +120,18 @@ const TimerBlock = () => {
         pathColor: '#c4ff43',
         textColor: '#fff',
         trailColor: '#000',
-      })} className='w-[150px]  min-[370px]:w-64 min-[420px]:w-72  absolute top-1/2 left-1/2  translate-x-[-50%] translate-y-[-50%] progress-circle' />
+      })} className='w-[150px]  min-[370px]:w-64 min-[420px]:w-72 progress-circle' />
 
-      {currentValues.isTap && isWork && <p className='font-bold text-xl ' >work</p>}
-      {currentValues.isTap && !isWork && <p className='font-bold text-xl' >rest</p>}
+
+      <p className='font-bold text-xl w-[48px] h-[29px]' >
+        {
+          currentValues.isTap && isWork ? 'work' :
+          currentValues.isTap && !isWork ? 'rest' :
+          ''
+        }
+      </p>
       
-      <audio ref={audio} src='../alarm2.mp3' ></audio>
+      <audio ref={audio} src='../alarm2.mp3'></audio>
     </div>
 
 

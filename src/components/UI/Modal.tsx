@@ -59,15 +59,15 @@ const Modal = ({setIsModal}: ModalProp) => {
                             
                         </div>
                         <div className="flex" >
-                            <Button variant="outline" size="icon" onClick={()=> setSettingsValues({...settingsValues, work: settingsValues.work - .25})} >
+                            <Button variant="outline" size="icon" onClick={()=> setSettingsValues({...settingsValues, work: settingsValues.work > .25 ? settingsValues.work - .25 : .25})} >
                                 <MdKeyboardArrowLeft className="w-5 h-5" />
                             </Button>
-                            <Button variant="outline" size="icon" onClick={()=> setSettingsValues({...settingsValues, work: settingsValues.work + .25}) } >
+                            <Button variant="outline" size="icon" onClick={()=> setSettingsValues({...settingsValues, work: settingsValues.work < 60 ? settingsValues.work + .25 : 60}) } >
                                 <MdKeyboardArrowRight  className="w-5 h-5"/>
                             </Button>
                         </div>
                     </div>
-                    <Slider value={[settingsValues.work]} max={60} step={0.25} onValueChange={([e])=>setSettingsValues({...settingsValues, work: e})} />
+                    <Slider value={[settingsValues.work]} min={.25} max={60} step={0.25} onValueChange={([e])=>setSettingsValues({...settingsValues, work: e})} />
                 </div>
                 <Separator className="m-4"/>
 
@@ -81,10 +81,10 @@ const Modal = ({setIsModal}: ModalProp) => {
                             </div>
                         </div>
                         <div className="flex" >
-                            <Button variant="outline" size="icon" onClick={()=> setSettingsValues({...settingsValues, rest: settingsValues.rest - .25})} >
+                            <Button variant="outline" size="icon" onClick={()=> setSettingsValues({...settingsValues, rest: settingsValues.rest > 0 ? settingsValues.rest - .25 : 0})} >
                                 <MdKeyboardArrowLeft className="w-5 h-5" />
                             </Button>
-                            <Button variant="outline" size="icon" onClick={()=> setSettingsValues({...settingsValues, rest: settingsValues.rest + .25}) } >
+                            <Button variant="outline" size="icon" onClick={()=> setSettingsValues({...settingsValues, rest: settingsValues.rest < 60 ? settingsValues.rest + .25 : 60}) } >
                                 <MdKeyboardArrowRight  className="w-5 h-5"/>
                             </Button>
                         </div>
@@ -100,10 +100,10 @@ const Modal = ({setIsModal}: ModalProp) => {
                             <p className="text-2xl" >{settingsValues.rounds}</p>
                         </div>    
                         <div className="flex" >
-                            <Button variant="outline" size="icon" onClick={()=> setSettingsValues({...settingsValues, rounds: settingsValues.rounds - 1})} >
+                            <Button variant="outline" size="icon" onClick={()=> setSettingsValues({...settingsValues, rounds: settingsValues.rounds > 1 ? settingsValues.rounds - 1 : 1})} >
                                 <MdKeyboardArrowLeft className="w-5 h-5" />
                             </Button>
-                            <Button variant="outline" size="icon" onClick={()=> setSettingsValues({...settingsValues, rounds: settingsValues.rounds + 1}) } >
+                            <Button variant="outline" size="icon" onClick={()=> setSettingsValues({...settingsValues, rounds: settingsValues.rounds < 20 ? settingsValues.rounds + 1 : 20}) } >
                                 <MdKeyboardArrowRight  className="w-5 h-5"/>
                             </Button>
                         </div>
